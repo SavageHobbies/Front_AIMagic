@@ -1,0 +1,632 @@
+/* --- Base Variables & Light Theme (Default) --- */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #333;
+    --container-bg: #ffffff;
+    --container-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --heading-color: #444;
+    --border-color: #eee;
+    --border-color-table: #ddd;
+    --button-bg: #4CAF50;
+    --button-text: #ffffff;
+    --button-hover-bg: #3e8e41;
+    --button-secondary-bg: #2196F3;
+    --button-secondary-hover-bg: #1976D2;
+    --toggle-button-bg: #e0e0e0;
+    --toggle-button-text: #333;
+    --toggle-button-border: #ccc;
+    --toggle-button-hover-bg: #d5d5d5;
+    --toggle-button-hover-border: #bbb;
+    --toggle-button-active-bg: var(--button-bg);
+    --toggle-button-active-text: var(--button-text);
+    --toggle-button-active-border: var(--button-bg);
+    --input-bg: #fff;
+    --input-border: #ccc;
+    --input-text: #333;
+    --status-text: #666;
+    --status-quiet-text: #888;
+    --table-header-bg: #f0f0f0;
+    --table-row-odd-bg: #f9f9f9;
+    --table-row-hover-bg: #f1f1f1;
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+    --separator-color: #ddd;
+
+    /* Theme Toggle */
+    --toggle-slider-bg: #ccc;
+    --toggle-slider-checked-bg: #4CAF50;
+    --toggle-knob-bg: white;
+}
+
+/* --- Dark Theme --- */
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --container-bg: #2c2c2c;
+    --container-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --heading-color: #f0f0f0;
+    --border-color: #444;
+    --border-color-table: #555;
+    --button-bg: #5cb85c; /* Slightly brighter green */
+    --button-text: #111;
+    --button-hover-bg: #4cae4c;
+    --button-secondary-bg: #5bc0de; /* Slightly brighter blue */
+    --button-secondary-hover-bg: #46b8da;
+    --toggle-button-bg: #555;
+    --toggle-button-text: #e0e0e0;
+    --toggle-button-border: #666;
+    --toggle-button-hover-bg: #666;
+    --toggle-button-hover-border: #777;
+    --toggle-button-active-bg: var(--button-bg);
+    --toggle-button-active-text: var(--button-text);
+    --toggle-button-active-border: var(--button-bg);
+    --input-bg: #3a3a3a;
+    --input-border: #666;
+    --input-text: #e0e0e0;
+    --status-text: #aaa;
+    --status-quiet-text: #888;
+    --table-header-bg: #383838;
+    --table-row-odd-bg: #333;
+    --table-row-hover-bg: #404040;
+    --link-color: #64b5f6; /* Lighter blue for links */
+    --link-hover-color: #90caf9;
+    --separator-color: #555;
+
+    /* Theme Toggle */
+    --toggle-slider-bg: #555;
+    --toggle-slider-checked-bg: #5cb85c;
+}
+
+
+/* --- General Styles --- */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: var(--container-bg);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: var(--container-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Header with Theme Toggle */
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+.header-controls h1 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: var(--heading-color);
+    transition: color 0.3s ease;
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-switch-wrapper span {
+    font-size: 0.9em;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+/* The switch - the box around the slider */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Slightly smaller */
+    height: 26px; /* Slightly smaller */
+}
+
+/* Hide default HTML checkbox */
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-slider-bg);
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px; /* Smaller knob */
+    width: 20px;  /* Smaller knob */
+    left: 3px;    /* Adjust position */
+    bottom: 3px;  /* Adjust position */
+    background-color: var(--toggle-knob-bg);
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--toggle-slider-checked-bg);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--toggle-slider-checked-bg);
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px); /* Adjust translation */
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 26px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* --- Headings --- */
+h1, h2 {
+    color: var(--heading-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 25px; /* Increased margin */
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- Input Method Toggles --- */
+.input-method-toggles {
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px;
+}
+
+.toggle-button {
+    padding: 10px 15px;
+    background-color: var(--toggle-button-bg);
+    color: var(--toggle-button-text);
+    border: 1px solid var(--toggle-button-border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500; /* Slightly bolder */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: var(--toggle-button-hover-bg);
+    border-color: var(--toggle-button-hover-border);
+}
+
+.toggle-button.active {
+    background-color: var(--toggle-button-active-bg);
+    color: var(--toggle-button-active-text);
+    border-color: var(--toggle-button-active-border);
+    font-weight: bold;
+}
+
+.input-method-group.hidden {
+    display: none;
+}
+
+
+/* --- Input Section --- */
+.input-section {
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--heading-color); /* Use heading color for labels */
+    transition: color 0.3s ease;
+}
+
+.input-group input[type="text"],
+.input-group input[type="file"] {
+    width: 100%;
+    padding: 12px 15px; /* Increased padding */
+    margin-bottom: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px; /* Slightly more rounded */
+    box-sizing: border-box;
+    font-size: 1em;
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="file"]:focus {
+    outline: none;
+    border-color: var(--button-secondary-bg); /* Highlight focus */
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3); /* Subtle glow */
+}
+
+
+.input-group button {
+    padding: 12px 20px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.input-group button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.input-group input[type="file"] {
+    padding: 8px 10px; /* Adjust padding for file input */
+}
+
+.status-message {
+    margin-top: 8px;
+    font-style: italic;
+    color: var(--status-text);
+    font-size: 0.9em;
+    min-height: 1.1em;
+    transition: color 0.3s ease;
+}
+.status-message.quiet {
+    color: var(--status-quiet-text);
+}
+
+
+.separator {
+    border: none;
+    border-top: 1px dashed var(--separator-color);
+    margin: 30px 0; /* Increased margin */
+    transition: border-color 0.3s ease;
+}
+
+
+/* --- Inventory Section --- */
+.inventory-section button#refreshInventoryBtn {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    background-color: var(--button-secondary-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.inventory-section button#refreshInventoryBtn:hover {
+    background-color: var(--button-secondary-hover-bg);
+}
+
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border-color-table); /* Add border around container */
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+#inventoryTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0; /* Remove margin as container has border */
+}
+
+#inventoryTable th, #inventoryTable td {
+    border: none; /* Remove individual cell borders */
+    border-bottom: 1px solid var(--border-color-table); /* Use bottom borders */
+    padding: 12px 15px; /* Increased padding */
+    text-align: left;
+    font-size: 0.95em;
+    vertical-align: middle;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+#inventoryTable th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--heading-color); /* Use heading color */
+    border-bottom-width: 2px; /* Thicker border below header */
+}
+
+#inventoryTable tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+#inventoryTable tbody tr:last-child td {
+    border-bottom: none; /* No border on last row */
+}
+
+#inventoryTable tbody tr:nth-child(odd) {
+    background-color: var(--table-row-odd-bg);
+}
+
+#inventoryTable tbody tr:hover {
+    background-color: var(--table-row-hover-bg);
+}
+
+#inventoryTable td a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+#inventoryTable td a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+#inventoryTable td button {
+     padding: 5px 10px; /* Slightly larger */
+     font-size: 0.85em;
+     margin-right: 5px;
+     cursor: pointer;
+     border-radius: 4px;
+     border: 1px solid var(--input-border);
+     background-color: var(--input-bg);
+     color: var(--text-color);
+     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+#inventoryTable td button:hover {
+    background-color: var(--toggle-button-hover-bg);
+    border-color: var(--toggle-button-hover-border);
+}
+
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important; /* Use important to override potential specificity issues */
+}
+
+
+
+
+/* --- Product Detail View Section --- */
+#product-detail-view {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    /* Add more specific styles for form elements, images etc. later */
+}
+
+#product-detail-view h2 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#product-detail-view form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+#product-detail-view form input[type="text"],
+#product-detail-view form textarea,
+#product-detail-view form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    margin-bottom: 10px;
+}
+
+#product-detail-view form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#product-detail-view form button {
+     padding: 10px 15px;
+     margin-top: 10px;
+     margin-right: 10px;
+     background-color: var(--button-bg);
+     color: var(--button-text);
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+}
+
+#product-detail-view form button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+
+/* --- Modal Styles --- */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+
+.modal.hidden {
+    display: none !important;
+}
+
+.modal-content {
+    background-color: var(--container-bg);
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 700px; /* Maximum width */
+    position: relative;
+    box-shadow: var(--container-shadow);
+}
+
+/* The Close Button */
+.close-btn {
+    color: var(--status-text);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.crop-image-container {
+    width: 100%;
+    max-height: 50vh; /* Limit height */
+    margin-bottom: 20px;
+    overflow: hidden; /* Hide parts of image outside container */
+}
+
+/* Cropper.js adds its own classes, ensure the container allows the image to be visible */
+.crop-image-container img {
+    display: block;
+    /* This rule is important for Cropper.js */
+    max-width: 100%;
+}
+
+.modal-actions {
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.modal-actions button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+}
+
+.modal-actions .button-primary {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+.modal-actions .button-primary:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.modal-actions .button-secondary {
+    background-color: var(--toggle-button-bg);
+    color: var(--toggle-button-text);
+    border: 1px solid var(--toggle-button-border);
+}
+.modal-actions .button-secondary:hover {
+    background-color: var(--toggle-button-hover-bg);
+    border-color: var(--toggle-button-hover-border);
+}
+
+
+#product-detail-view form button[type="button"] {
+    background-color: var(--toggle-button-bg);
+    color: var(--toggle-button-text);
+    border: 1px solid var(--toggle-button-border);
+}
+
+#product-detail-view form button[type="button"]:hover {
+    background-color: var(--toggle-button-hover-bg);
+    border-color: var(--toggle-button-hover-border);
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px auto;
+    }
+    .header-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px; /* Add gap when stacked */
+    }
+    #inventoryTable th, #inventoryTable td {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .input-group input, .input-group button {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 15px;
+    }
+    h1 { font-size: 1.6em; } /* Adjusted */
+    h2 { font-size: 1.3em; } /* Adjusted */
+    .input-group input, .input-group button {
+        font-size: 1em;
+    }
+    #inventoryTable th, #inventoryTable td {
+        padding: 8px;
+        font-size: 0.85em; /* Slightly smaller on very small screens */
+    }
+    .toggle-button {
+        flex-grow: 1; /* Make toggle buttons fill width */
+        text-align: center;
+    }
+}
